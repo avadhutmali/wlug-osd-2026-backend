@@ -9,7 +9,10 @@ const Participant = require('./models/Participant');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: '*', 
+  credentials: true
+}));
 app.use(express.json());
 
 // 1. Database Connection

@@ -21,11 +21,18 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
 // 2. Email Transporter Configuration
+// ✅ NEW (Explicit SSL Configuration)
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // Or use 'smtp.host.com' for other providers
+  host: "smtp.gmail.com", // Explicitly host
+  port: 465,              // Force secure port
+  secure: true,           // Use SSL
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
+  },
+  // Add this to handle potential certificate issues in cloud environments
+  tls: {
+    rejectUnauthorized: false
   }
 });
 

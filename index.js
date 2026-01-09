@@ -22,18 +22,20 @@ mongoose.connect(process.env.MONGO_URI)
 
 // 2. Email Transporter Configuration
 // ✅ NEW (Explicit SSL Configuration)
+// backend/index.js
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com", // Explicitly host
-  port: 465,              // Force secure port
-  secure: true,           // Use SSL
+  host: "smtp.gmail.com",
+  port: 587,            // Use 587 instead of 465
+  secure: false,        // False for 587 (it upgrades via STARTTLS)
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    pass: process.env.EMAIL_PASS,
   },
-  // Add this to handle potential certificate issues in cloud environments
   tls: {
     rejectUnauthorized: false
-  }
+  },
+  // ⚡ CRITICAL FIX: Force the server to use IPv4 ⚡
+  family: 4 
 });
 
 // 3. The HTML Email Template Function

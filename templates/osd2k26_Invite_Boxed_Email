@@ -1,0 +1,312 @@
+const createEmailTemplate = (name, ticketId) => {
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Open Source Day 2k26 Registration</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* RESET */
+    body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+    table { border-collapse:collapse !important; }
+    img { -ms-interpolation-mode:bicubic; border:0; height:auto; line-height:100%; outline:none; text-decoration:none; max-width:100%; }
+
+    /* OUTER WRAPPER */
+    body { 
+      margin:0; 
+      padding:0; 
+      width:100% !important; 
+      background:#f4f4f4; 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .wrapper { 
+      width:100%; 
+      table-layout:fixed; 
+      background:#f4f4f4; 
+      padding:40px 0; 
+    }
+
+    /* CARD CONTAINER */
+    .container {
+      width:100% !important;
+      max-width:600px;
+      margin:0 auto;
+      background:#ffffff;
+      border-radius:12px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.12);
+      overflow:hidden;
+      border-top: 5px solid #ff6600; /* WLUG Orange Accent */
+    }
+
+    /* BANNER AREA */
+    .banner {
+      width: 100%;
+      background-color: #000;
+      text-align: center;
+      padding: 0;
+    }
+    .banner img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* MAIN CONTENT */
+    .content {
+      padding: 35px 40px;
+      color: #555;
+      font-size: 16px;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .content h1 {
+      font-size: 28px;
+      margin: 0 0 15px;
+      color: #1a1a1a;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .content p { 
+      margin: 15px 0; 
+    }
+    .content a { 
+      color: #ff6600; 
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+    .content a:hover {
+      color: #cc5200;
+      text-decoration: underline;
+    }
+    .content strong { 
+      color: #000; 
+      font-weight: 700;
+    }
+
+    /* TICKET ID BOX */
+    .ticket-box {
+      background: #fff5eb; /* Light Orange BG */
+      border: 2px dashed #ff6600;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    .ticket-id {
+      font-family: 'Courier New', monospace;
+      font-size: 24px;
+      font-weight: 900;
+      color: #ff6600;
+      letter-spacing: 2px;
+    }
+
+    /* EVENT DETAILS SECTION */
+    .event-details {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 30px 0;
+      text-align: center;
+      border: 1px solid #eaeaea;
+    }
+    .event-details h2 {
+      font-size: 20px;
+      margin: 0 0 20px;
+      color: #1a1a1a;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      padding-bottom: 12px;
+    }
+    .event-details h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: #ff6600; /* Orange underline */
+    }
+    .detail-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .detail-card {
+      flex: 1;
+      min-width: 120px;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: 1px solid #eee;
+    }
+    .detail-card i {
+      font-size: 24px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .detail-card .icon { color: #ff6600; } /* All icons orange */
+    
+    .detail-card h3 {
+      margin: 0 0 5px;
+      font-size: 14px;
+      color: #777;
+      text-transform: uppercase;
+    }
+    .detail-card p {
+      margin: 0;
+      font-size: 16px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    /* REGISTRATION BADGE */
+    .badge {
+      display: inline-block;
+      background: #000;
+      color: #fff;
+      padding: 8px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      margin: 10px 0 20px 0;
+      font-size: 14px;
+      border: 1px solid #ff6600;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #111;
+      padding: 30px;
+      font-size: 14px;
+      color: #888;
+      text-align: center;
+      border-top: 4px solid #ff6600;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 0 0 20px 0;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 20px; /* Larger icons */
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover {
+      color: #ff6600;
+    }
+    .copyright {
+      font-size: 12px;
+      color: #555;
+      margin-top: 15px;
+    }
+
+    /* RESPONSIVE */
+    @media only screen and (max-width: 600px) {
+      .content { padding: 25px 20px; }
+      .content h1 { font-size: 24px; }
+      .detail-grid { flex-direction: column; }
+      .detail-card { width: 100%; box-sizing: border-box; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+
+      <div class="banner">
+         <img src="https://via.placeholder.com/600x200/000000/ff6600?text=OPEN+SOURCE+DAY+2K26" alt="OSD 2k26 Banner">
+      </div>
+
+      <div class="content">
+        <h1>Welcome to OSD 2k26! 🚀</h1>
+        
+        <div class="badge">
+          <i class="fas fa-check-circle" style="color:#ff6600; margin-right:5px;"></i> Registration Confirmed
+        </div>
+        
+        <p>Hello <strong>${name}</strong>,</p>
+        <p>We are thrilled to confirm your spot for <strong>Open Source Day 2k26</strong>! Get ready to dive deep into the world of Git, Cybersecurity, and Reverse Engineering.</p>
+
+        <div class="ticket-box">
+          <div style="font-size: 12px; color: #888; margin-bottom: 5px; text-transform: uppercase;">Your Unique Entry ID</div>
+          <div class="ticket-id">${ticketId}</div>
+        </div>
+
+        <div class="event-details">
+          <h2>Event Details</h2>
+          <div class="detail-grid">
+            
+            <div class="detail-card">
+              <i class="fas fa-calendar-alt icon"></i>
+              <h3>Date</h3>
+              <p>18 Jan 2026</p>
+            </div>
+            
+            <div class="detail-card">
+              <i class="fas fa-clock icon"></i>
+              <h3>Time</h3>
+              <p>9:00 AM</p>
+            </div>
+            
+            <div class="detail-card">
+              <i class="fas fa-map-marker-alt icon"></i>
+              <h3>Venue</h3>
+              <p>Main CCF</p>
+              <p style="font-size:12px; font-weight:normal; color:#666; margin-top:2px;">WCE, Sangli</p>
+            </div>
+
+          </div>
+        </div>
+
+        <p>Please present your <strong>Entry ID</strong> or the <strong>QR Code</strong> (from the website) at the registration desk.</p>
+        
+        <p>
+          🔗 <strong>Official Website:</strong> <br>
+          <a href="https://wcewlug.org">wcewlug.org</a>
+        </p>
+
+        <p style="margin-top: 30px; font-size: 14px; color: #888;">
+          <i>We look forward to seeing you there!</i>
+        </p>
+
+        <div style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+          <p style="margin:0;">Cheers,</p>
+          <strong style="font-size: 18px;">WLUG Team</strong>
+        </div>
+      </div>
+
+      <div class="footer">
+        
+        <div class="footer-links">
+          <a href="https://wcewlug.org"><i class="fas fa-globe"></i></a>
+          <a href="https://linkedin.com/company/wlug-club"><i class="fab fa-linkedin"></i></a>
+          <a href="https://instagram.com/wcewlug"><i class="fab fa-instagram"></i></a>
+          <a href="https://twitter.com/wcewlug"><i class="fab fa-twitter"></i></a>
+          <a href="mailto:osdk2k26@wcewlug.org"><i class="fas fa-envelope"></i></a>
+        </div>
+        
+        <p class="copyright">
+          © 2026 Walchand Linux Users' Group<br>
+          Walchand College of Engineering, Sangli
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+};
+
+module.exports = createEmailTemplate;
